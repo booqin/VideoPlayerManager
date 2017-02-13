@@ -15,6 +15,7 @@ import com.volokh.danylo.videolist.visibility_demo.fragments.VisibilityUtilsFrag
 /**
  * Test by Boqin
  * This activity contains a fragment and gives the switch option between two fragments.
+ *
  * 1. {@link VideoRecyclerViewFragment}
  * 2. {@link VideoListFragment}
  */
