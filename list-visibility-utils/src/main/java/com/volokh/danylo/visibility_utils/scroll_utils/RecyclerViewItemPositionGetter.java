@@ -20,6 +20,9 @@ public class RecyclerViewItemPositionGetter implements ItemsPositionGetter {
     private LinearLayoutManager mLayoutManager;
     private RecyclerView mRecyclerView;
 
+    /** 
+     * 构造器，持有Manager和RecyclerView，获取该对应位子的数据
+     */
     public RecyclerViewItemPositionGetter(LinearLayoutManager layoutManager, RecyclerView recyclerView) {
         mLayoutManager = layoutManager;
         mRecyclerView = recyclerView;
