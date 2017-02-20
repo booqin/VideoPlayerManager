@@ -1,5 +1,6 @@
 package com.volokh.danylo.visibility_utils.calculator;
 
+import android.util.Log;
 import android.view.View;
 
 import com.volokh.danylo.visibility_utils.items.ListItem;
@@ -52,6 +53,7 @@ public class SingleListViewItemActiveCalculator extends BaseItemsVisibilityCalcu
     }
 
     /**
+     * 提供接口，对应的视频存在
      * Methods of this callback will be called when new active item is found {@link Callback#activateNewCurrentItem(ListItem, View, int)}
      * or when there is no active item {@link Callback#deactivateCurrentItem(ListItem, View, int)} - this might happen when user scrolls really fast
      */
@@ -171,7 +173,10 @@ public class SingleListViewItemActiveCalculator extends BaseItemsVisibilityCalcu
         ListItemData mostVisibleItem = getMockCurrentItem(itemsPositionGetter, firstVisiblePosition, lastVisiblePosition);
         int maxVisibilityPercents = mostVisibleItem.getVisibilityPercents(mListItems);
 
+
+        //滑动状态，由ScrollDirectionDetector维护
         switch (mScrollDirection){
+            //isMostVisibleItemChanged确定该boolean值
             case UP:
                 bottomToTopMostVisibleItem(itemsPositionGetter, maxVisibilityPercents, mostVisibleItem);
                 break;
@@ -305,11 +310,11 @@ public class SingleListViewItemActiveCalculator extends BaseItemsVisibilityCalcu
      * @param listItemData
      */
     private void calculateActiveItem(ItemsPositionGetter itemsPositionGetter, ListItemData listItemData) {
-        /** 1. */
+        /** 1. 获取当前item的可见度*/
         int currentItemVisibilityPercents = listItemData.getVisibilityPercents(mListItems);
         if(SHOW_LOGS) Logger.v(TAG, "calculateActiveItem, mScrollDirection " + mScrollDirection);
 
-        /** 2. */
+        /** 2. 根据滑动的状态，来获取下一个显示的Item*/
         ListItemData neighbourItemData = new ListItemData();
         switch (mScrollDirection){
             case UP:
@@ -321,11 +326,12 @@ public class SingleListViewItemActiveCalculator extends BaseItemsVisibilityCalcu
         }
         if(SHOW_LOGS) Logger.v(TAG, "calculateActiveItem, currentItemVisibilityPercents " + currentItemVisibilityPercents);
 
-        /** 3. */
+        /** 3. 判断当前Item是否达到阈值*/
+        Log.d("BQ", ""+currentItemVisibilityPercents + ";"+enoughPercentsForDeactivation(currentItemVisibilityPercents));
         if(enoughPercentsForDeactivation(currentItemVisibilityPercents) && neighbourItemData.isAvailable()){
 
             // neighbour item become active (current)
-            /** 4. */
+            /** 4. 更新显示的Item*/
             setCurrentItem(neighbourItemData);
         }
     }

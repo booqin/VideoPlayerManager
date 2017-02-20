@@ -2,6 +2,7 @@ package com.volokh.danylo.videolist.video_list_demo.adapter.items;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,7 +116,7 @@ public abstract class BaseVideoItem implements VideoItem, ListItem{
 
         int height = currentView.getHeight();
         if(SHOW_LOGS) Logger.v(TAG, "getVisibilityPercents height " + height);
-
+        Log.d("BQ", ""+viewIsPartiallyHiddenTop() + ";"+height+";"+mCurrentViewRect.top);
         if(viewIsPartiallyHiddenTop()){
             // view is partially hidden behind the top edge
             percents = (height - mCurrentViewRect.top) * 100 / height;

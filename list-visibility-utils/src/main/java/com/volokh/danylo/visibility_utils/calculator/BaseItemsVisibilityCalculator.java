@@ -24,6 +24,7 @@ public abstract class BaseItemsVisibilityCalculator implements ListItemsVisibili
 
         if (SHOW_LOGS)
             Logger.v(TAG, "onScroll, firstVisibleItem " + firstVisibleItem + ", visibleItemCount " + visibleItemCount + ", scrollState " + scrollStateStr(scrollState));
+        //维护上下滑动，判断该事件是up还是down
         mScrollDirectionDetector.onDetectedListScroll(itemsPositionGetter, firstVisibleItem);
 
         switch (scrollState) {

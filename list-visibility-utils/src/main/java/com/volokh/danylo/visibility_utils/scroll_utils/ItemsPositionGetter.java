@@ -12,13 +12,15 @@ import android.view.View;
  * Created by danylo.volokh on 9/20/2015.
  */
 public interface ItemsPositionGetter {
+
+    //获取特定位置的View
     View getChildAt(int position);
-
+    //获取子View的位置
     int indexOfChild(View view);
-
+    //获取子View的数量
     int getChildCount();
-
+    //最后可见View的位置
     int getLastVisiblePosition();
-
+    //第一个可见View的位置
     int getFirstVisiblePosition();
 }
